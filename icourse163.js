@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Icourse163_auto_full_score_review
+// @name         Icourse163_Auto_Full_Score_Review
 // @namespace    Icourse163
 // @version      0.0.1
 // @description  在icourse163的作业自评互评中对每个题自动选择最大的分数并自动填写评语。投我以木桃，报之以琼瑶。人人为我，我为人人。
