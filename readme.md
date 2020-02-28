@@ -1,7 +1,7 @@
 # icourse163_auto_full_score_review
 
 ## Description描述
-在icourse163的作业自评互评中对每个题自动选择最大的分数。
+在icourse163(中国大学MOOC)的作业自评互评中对每个题自动选择最大的分数。
 投我以木桃，报之以琼瑶。
 人人为我，我为人人。
 (

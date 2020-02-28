@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Icourse163_Auto_Full_Score_Review
 // @namespace    Icourse163
-// @version      0.0.1
-// @description  在icourse163的作业自评互评中对每个题自动选择最大的分数并自动填写评语。投我以木桃，报之以琼瑶。人人为我，我为人人。
+// @version      0.0.2
+// @description  在icourse163(中国大学MOOC)的作业自评互评中对每个题自动选择最大的分数并自动填写评语。投我以木桃，报之以琼瑶。人人为我，我为人人。
 // @author       XenoAmess
 // @match        https://www.icourse163.org/*
 // @run-at       document-end
