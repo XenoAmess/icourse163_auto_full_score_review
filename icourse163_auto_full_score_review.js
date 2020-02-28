@@ -33,6 +33,12 @@ function doIt() {
 }
 
 function doItNonCheck() {
+    if (!window.jQuery) {
+        var oScript = document.createElement('script');
+        oScript.type = "text/javascript";
+        oScript.src = "//s1.hdslb.com/bfs/static/jinkela/long/js/jquery/jquery1.7.2.min.js";
+        document.head.appendChild(oScript);
+    }
     var scorePanelList = $("div.j-content>div.j-list>div>div.u-point>div.detail>div.s");
     for (var i = 0; i < scorePanelList.length; i++) {
         var scorePanel = scorePanelList[i];
@@ -69,11 +75,5 @@ function doItNonCheck() {
 
 (function () {
     'use strict';
-    if (!window.jQuery) {
-        var oScript = document.createElement('script');
-        oScript.type = "text/javascript";
-        oScript.src = "//s1.hdslb.com/bfs/static/jinkela/long/js/jquery/jquery1.7.2.min.js";
-        document.head.appendChild(oScript);
-    }
     window.onload = window.setInterval(doIt, REFRESH_TIME);
 })();
