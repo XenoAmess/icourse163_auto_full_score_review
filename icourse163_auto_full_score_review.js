@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Icourse163_Auto_Full_Score_Review
 // @namespace    Icourse163
-// @version      0.0.2
+// @version      0.0.3
 // @description  在icourse163(中国大学MOOC)的作业自评互评中对每个题自动选择最大的分数并自动填写评语。投我以木桃，报之以琼瑶。人人为我，我为人人。
 // @author       XenoAmess
 // @match        https://www.icourse163.org/*
@@ -39,7 +39,7 @@ function doItNonCheck() {
         oScript.src = "//s1.hdslb.com/bfs/static/jinkela/long/js/jquery/jquery1.7.2.min.js";
         document.head.appendChild(oScript);
     }
-    var scorePanelList = $("div.j-content>div.j-list>div>div.u-point>div.detail>div.s");
+    var scorePanelList = $("div.detail>div.s");
     for (var i = 0; i < scorePanelList.length; i++) {
         var scorePanel = scorePanelList[i];
         var maxScore = -1;
@@ -56,9 +56,11 @@ function doItNonCheck() {
                 }
             }
         }
-        for (var k = 0; k < scorePanel.children[maxIndex].children.length; k++) {
-            if (scorePanel.children[maxIndex].children[k].type === "radio") {
-                $(scorePanel.children[maxIndex].children[k]).click();
+        if (maxIndex !== -1) {
+            for (var k = 0; k < scorePanel.children[maxIndex].children.length; k++) {
+                if (scorePanel.children[maxIndex].children[k].type === "radio") {
+                    $(scorePanel.children[maxIndex].children[k]).click();
+                }
             }
         }
     }
@@ -70,7 +72,6 @@ function doItNonCheck() {
             commentTextArea.value = COMMENT_STRINGS_LIST[getRandomInt(COMMENT_STRINGS_LIST.length)];
         }
     }
-    $("div.m-learnbox>div.m-homework>div.j-homework-box>div.u-homework-evaAction>div.bottombtnwrap>a.u-btn.j-submitbtn").click();
 }
 
 (function () {
