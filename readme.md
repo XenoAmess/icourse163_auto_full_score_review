@@ -9,4 +9,4 @@
 )
 
 ## Release发布地址
-
+https://greasyfork.org/zh-CN/scripts/397047-icourse163-auto-full-score-review
