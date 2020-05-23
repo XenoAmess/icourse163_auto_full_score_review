@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Icourse163_Auto_Full_Score_Review
 // @namespace    Icourse163
-// @version      0.0.3
+// @version      0.0.4
 // @description  在icourse163(中国大学MOOC)的作业自评互评中对每个题自动选择最大的分数并自动填写评语。投我以木桃，报之以琼瑶。人人为我，我为人人。
 // @author       XenoAmess
 // @match        https://www.icourse163.org/*
@@ -32,7 +32,20 @@ function doIt() {
     return doItNonCheck();
 }
 
+function parseFloatEx(string) {
+    var res = "";
+    for (var i = 0; i < string.length; i++) {
+        var chr = string.charAt(i);
+        if ((chr >= '0' && chr <= '9') || chr === '.') {
+            res += chr;
+        }
+    }
+    return parseFloat(res);
+}
+
 function doItNonCheck() {
+    var i, j, k;
+
     if (!window.jQuery) {
         var oScript = document.createElement('script');
         oScript.type = "text/javascript";
@@ -40,14 +53,16 @@ function doItNonCheck() {
         document.head.appendChild(oScript);
     }
     var scorePanelList = $("div.detail>div.s");
-    for (var i = 0; i < scorePanelList.length; i++) {
+    for (i = 0; i < scorePanelList.length; i++) {
         var scorePanel = scorePanelList[i];
         var maxScore = -1;
         var maxIndex = -1;
-        for (var j = 0; j < scorePanel.children.length; j++) {
-            for (var k = 0; k < scorePanel.children[j].children.length; k++) {
+        for (j = 0; j < scorePanel.children.length; j++) {
+            for (k = 0; k < scorePanel.children[j].children.length; k++) {
                 if (scorePanel.children[j].children[k].type === "radio") {
-                    var nowScore = parseInt(scorePanel.children[j].children[k].value);
+                    // console.log(scorePanel.children[j].children[k].value);
+                    // console.log(parseFloatEx(scorePanel.children[j].children[k].value));
+                    var nowScore = parseFloatEx(scorePanel.children[j].children[k].value);
                     var nowIndex = j;
                     if (maxScore < nowScore) {
                         maxScore = nowScore;
@@ -56,17 +71,20 @@ function doItNonCheck() {
                 }
             }
         }
+        console.log("maxIndex:" + maxIndex);
+        console.log("maxScore:" + maxScore);
         if (maxIndex !== -1) {
-            for (var k = 0; k < scorePanel.children[maxIndex].children.length; k++) {
+            for (k = 0; k < scorePanel.children[maxIndex].children.length; k++) {
                 if (scorePanel.children[maxIndex].children[k].type === "radio") {
-                    $(scorePanel.children[maxIndex].children[k]).click();
+                    console.log($(scorePanel.children[maxIndex].children[k]));
+                    $(scorePanel.children[maxIndex].children[k]).attr('checked','true');
                 }
             }
         }
     }
 
     var commentTextAreaList = $("textarea.j-textarea.inputtxt");
-    for (var i = 0; i < commentTextAreaList.length; i++) {
+    for (i = 0; i < commentTextAreaList.length; i++) {
         var commentTextArea = commentTextAreaList[i];
         if (commentTextArea.value === undefined || commentTextArea.value === null || commentTextArea.value === "" || commentTextArea.value.length === 0) {
             commentTextArea.value = COMMENT_STRINGS_LIST[getRandomInt(COMMENT_STRINGS_LIST.length)];
